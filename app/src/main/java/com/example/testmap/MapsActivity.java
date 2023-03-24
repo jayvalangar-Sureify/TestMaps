@@ -21,6 +21,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -90,9 +91,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         if (location != null) {
             LatLng set_custom_location = new LatLng(21.210423, 72.875595);
             LatLng current_my_location = new LatLng(location.getLatitude(), location.getLongitude());
-            googleMap.addMarker(new MarkerOptions().position(set_custom_location).title("Custom Location"));
+            googleMap.addMarker(new MarkerOptions().position(set_custom_location).title("Custom Location")).setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
             googleMap.addMarker(new MarkerOptions().position(current_my_location).title("My Location"));
-            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(set_custom_location, 10));
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(set_custom_location, 11));
         }
     }
     @Override
