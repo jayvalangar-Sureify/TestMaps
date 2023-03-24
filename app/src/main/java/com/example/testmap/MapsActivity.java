@@ -1,14 +1,17 @@
 package com.example.testmap;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -23,6 +26,7 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
@@ -95,6 +99,36 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             googleMap.addMarker(new MarkerOptions().position(current_my_location).title("My Location"));
             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(set_custom_location, 11));
         }
+
+        googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener()
+        {
+
+            @Override
+            public boolean onMarkerClick(Marker arg0) {
+                if(arg0 != null ); // if marker  source is clicked
+                Toast.makeText(MapsActivity.this, arg0.getTitle(), Toast.LENGTH_SHORT).show();// display toast
+
+                new AlertDialog.Builder(MapsActivity.this)
+                        .setTitle(""+arg0.getTitle())
+                        .setMessage("Book your place")
+
+                        // Specifying a listener allows you to take an action before dismissing the dialog.
+                        // The dialog is automatically dismissed when a dialog button is clicked.
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // Continue with delete operation
+                                dialog.dismiss();
+                            }
+                        })
+
+                        // A null listener allows the button to dismiss the dialog and take no further action.
+                        .setNegativeButton(android.R.string.no, null)
+                        .setIcon(android.R.drawable.ic_menu_mylocation)
+                        .show();
+                return true;
+            }
+
+        });
     }
     @Override
     public void onResume() {
