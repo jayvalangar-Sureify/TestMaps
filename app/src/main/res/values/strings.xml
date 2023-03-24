@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Test MAp</string>
+    <string name="title_activity_maps">MapsActivity</string>
+
+    <string name="i_am_here">I am here</string>
+    <string name="provider_failed">Provider Fail</string>
+</resources>
